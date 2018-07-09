@@ -369,15 +369,86 @@
       
         
           
+            <a id="more"></a>
+<h2 id="shell简介"><a href="#shell简介" class="headerlink" title="shell简介"></a>shell简介</h2><blockquote>
+<h3 id="编程语言分类"><a href="#编程语言分类" class="headerlink" title="编程语言分类"></a>编程语言分类</h3><ol>
+<li>运行方式</li>
+</ol>
+<ul>
+<li>编译运行：源代码 -&gt; 编译 -&gt; 程序文件</li>
+<li>解释运行：源代码 -&gt; 边解释边运行</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>编程功能</li>
+</ol>
+<ul>
+<li>shell编程：利用系统上的命令和编程组件进行编程</li>
+<li>完整编程：利用库和编程组件进行编程</li>
+</ul>
+<ol start="3">
+<li>编程模型</li>
+</ol>
+<ul>
+<li>面向过程：以指令为中心，数据服务代码</li>
+<li>面向对象：以数据为中心，围绕数据组织</li>
+</ul>
+<p><strong>shell：解释运行，依赖于外部程序文件的过程式编程</strong><br><strong>shell脚本实际上是命令的堆积，但由于很多命令不具有幂等性，需要逻辑来判断运行条件是否满足，以避免命令执行发生的错误</strong></p>
+<hr>
+<blockquote>
+<h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><p>shell脚本通常是一个以shebang开头的文本文件<br>形如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>其中/bin/bash是Bash解释器的路径</p>
+<p>PS:shebang是#!两个字符名称的组合<br>在Unix中，#读作sharp或hash，!读作bang</p>
+<blockquote>
+<h5 id="常见解释器"><a href="#常见解释器" class="headerlink" title="常见解释器"></a>常见解释器</h5><ul>
+<li>/bin/bash</li>
+<li>/bin/csh</li>
+<li>/usr/bin/python</li>
+<li>/usr/bn/perl</li>
+</ul>
+</blockquote>
+<blockquote>
+<h5 id="脚本运行："><a href="#脚本运行：" class="headerlink" title="脚本运行："></a>脚本运行：</h5><ol>
+<li>赋予执行权限，直接执行</li>
+<li>直接运行解释器程序，将脚本以命令行参数传递给解释器运行</li>
+</ol>
+</blockquote>
+<blockquote>
+<h5 id="登录类型"><a href="#登录类型" class="headerlink" title="登录类型"></a>登录类型</h5><ol>
+<li>交互式登录</li>
+</ol>
+<ul>
+<li>某终端账号密码登录</li>
+<li>su - USERNAME</li>
+</ul>
+<ol start="2">
+<li>非交互式登录</li>
+</ol>
+<ul>
+<li>su USERNAME</li>
+<li>图形界面打开的终端</li>
+<li>运行脚本</li>
+</ul>
+</blockquote>
+<blockquote>
+<h5 id="bash配置文件"><a href="#bash配置文件" class="headerlink" title="bash配置文件"></a>bash配置文件</h5><ul>
+<li>profilel类：为交互式登录的shell提供配置<br>作用：用于定义环境变量，用于运行命令或脚本 </li>
+</ul>
+</blockquote>
+<p>  全局：对所有用户都生效<br>  /etc/profile<br>  /etc/profile.d/*.sh<br>  用户个人：仅对仅对当前用户有效<br>  ~/.bash_profile</p>
+<ul>
+<li><p>bashrc类：为非交互式登录的shell提供配置<br>作用：定义本地变量，定义命令别名</p>
+<p>全局：/etc/bashrc<br>用户个人：~/.bashrc</p>
+<p>注意：仅管理员可修改全局配置文件</p>
+</li>
+</ul>
+<p>交互式登录shell进程：<br>/etc/profile -&gt; /etc/profile.d/*.sh -&gt; ~/.bash_profile -&gt; ~/.bashrc -&gt; /etc/bashrc</p>
+<p>非交互式登录shell进程：<br>~/.bashrc -&gt; /etc/bashrc -&gt; /etc/profile.d/*.sh</p>
+<p>命令行中定义的特性，如变量和别名，作用域为当前shell进程的生命周期<br>配置文件定义的特性，只对随后新启动的shell进程有效</p>
+<p>要让配置文件定义的特性立即生效,可以让shell重读配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /PATH/FROM/CONF_FILE</span><br></pre></td></tr></table></figure></p>
+
           
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/10/Linux(1)--基本概念/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -517,15 +588,30 @@
       
         
           
+            <a id="more"></a>
+<h3 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h3><blockquote>
+<p>hexo n = hexo new<br>hexo p = hexo publish<br>hexo g = hexo generate<br>hexo s = hexo server<br>hexo d = hexo deploy<br>hexo c = hexo clean</p>
+</blockquote>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><blockquote>
+<p>hexo new blog BLOG<br>hexo new page PAGE</p>
+</blockquote>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><blockquote>
+<p>hexo server<br>监视文件变动，自动更新</p>
+</blockquote>
+<blockquote>
+<p>hexo server -s<br>静态模式</p>
+</blockquote>
+<blockquote>
+<p>hexo server -p PORT<br>以指定端口启动</p>
+</blockquote>
+<blockquote>
+<p>hexo server -i IP<br>以指定IP启动</p>
+</blockquote>
+<blockquote>
+<p>hexo d -g<br>生成静态页面并部署</p>
+</blockquote>
+
           
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/03/Hexo命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
