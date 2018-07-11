@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="本文介绍Linux的用户、权限、组">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-11T09:48:30.670Z">
+<meta property="og:updated_time" content="2018-07-11T09:51:19.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux(2)--用户、权限、组">
 <meta name="twitter:description" content="本文介绍Linux的用户、权限、组">
@@ -390,7 +390,7 @@
 <p><strong>用户标识：UserID(UID)</strong><br>16位的二进制数字0-65535</p>
 <ul>
 <li>管理员：0</li>
-<li>普通童虎：1-65535<ul>
+<li>普通用户：1-65535<ul>
 <li>系统用户：1-499(CentOS6) 1-999(CentOS7)</li>
 <li>登录用户：500-60000(CentOS6) 1000-60000(CentOS7)</li>
 </ul>
@@ -524,9 +524,8 @@
 </blockquote>
 <p><strong>PS：用户对目录有写权限，但是对其下的文件没有写权限，不能修改此文件，但可以删除此文件</strong></p>
 <blockquote>
-<p><strong>umask：</strong><br>文件的权限反向掩码，遮盖码<br>666-umask为文件默认权限<br>777-umask为目录默认权限<br>默认文件不能有执行权限，如果减得结果有执行权限，则需要将其加1</p>
+<p><strong>umask：</strong><br>文件的权限反向掩码，遮盖码<br>666-umask为文件默认权限<br>777-umask为目录默认权限<br>默认文件不能有执行权限，如果减得结果有执行权限，则需要将其加1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看当前umask</span><br><span class="line">#umask </span><br><span class="line">设置umask</span><br><span class="line">#umask MASK</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看当前umask</span><br><span class="line">#umask </span><br><span class="line">设置umask</span><br><span class="line">#umask MASK</span><br></pre></td></tr></table></figure>
 <p>此设定仅对当前shell进程有效</p>
 <blockquote>
 <p><strong>install命令：</strong><br>复制文件且设置文件属性，不能复制目录<br>功能：</p>
