@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="本文介绍Linux的用户、权限、组">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-11T09:14:39.880Z">
+<meta property="og:updated_time" content="2018-07-11T09:48:30.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux(2)--用户、权限、组">
 <meta name="twitter:description" content="本文介绍Linux的用户、权限、组">
@@ -487,11 +487,20 @@
 <p><strong>su命令(switch user)：</strong><br>切换用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#su - USERNAME 登录式切换：重新读取用户配置，重新初始化</span><br><span class="line">#su USERNAME 非登录式切换：不读取用户配置初始化</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>管理员可无密码切换至其他任何用户</p>
+<blockquote>
+<p><strong>whoami命令：</strong><br>查看当前用户</p>
+</blockquote>
+<blockquote>
+<p><strong>pwck命令：</strong><br>密码检测</p>
+</blockquote>
+<blockquote>
+<p><strong>grpch命令：</strong><br>组检测</p>
+</blockquote>
 <h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><blockquote>
 <p><strong>进程安全上下文：</strong><br>进程对文件的访问权限应用模型：<br>进程的属主与文件的属主是否相同，如果相同则判断属组，都不是则使用other权限</p>
 </blockquote>
 <blockquote>
-<p>左3位：user权限<br>中3位：group权限<br>右3位：other权限</p>
+<p><strong>权限的表示：</strong><br>9位二进制表示，可写为3位八进制数字<br>左3位：user权限<br>中3位：group权限<br>右3位：other权限</p>
 </blockquote>
 <blockquote>
 <p><strong>rwx：</strong><br>read：读权限<br>writer：写权限<br>excute：执行权限</p>
@@ -501,6 +510,34 @@
 </blockquote>
 <blockquote>
 <p><strong>目录：</strong><br>r：可使用ls命令获取其下所有文件列表<br>w：可修改此目录下的文件列表，即创建和删除文件<br>e：若可使用cd命令至此目录中，则可用ls -l获取文件详细信息</p>
+</blockquote>
+<blockquote>
+<p><strong>chmod：</strong><br>权限管理命令，只能修改属于自己的文件<br>MODE表示法：</p>
+<ol>
+<li>授权表示法：直接操作一类用户的所有权限位</li>
+<li>授权表示法：直接操作一类用户的一个权限位</li>
+<li>八进制授权法</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>从属关系管理命令：</strong><br>只有管理员可以使用<br>chown：可修改用户和组<br>chgrp：只能修改组</p>
+</blockquote>
+<p><strong>PS：用户对目录有写权限，但是对其下的文件没有写权限，不能修改此文件，但可以删除此文件</strong></p>
+<blockquote>
+<p><strong>umask：</strong><br>文件的权限反向掩码，遮盖码<br>666-umask为文件默认权限<br>777-umask为目录默认权限<br>默认文件不能有执行权限，如果减得结果有执行权限，则需要将其加1</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看当前umask</span><br><span class="line">#umask </span><br><span class="line">设置umask</span><br><span class="line">#umask MASK</span><br></pre></td></tr></table></figure>
+<p>此设定仅对当前shell进程有效</p>
+<blockquote>
+<p><strong>install命令：</strong><br>复制文件且设置文件属性，不能复制目录<br>功能：</p>
+<ol>
+<li>单源复制</li>
+<li>多源复制</li>
+<li>创建目录</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>mktemp命令：</strong><br>创建临时文件或目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#myfile=$(mktpmp /tmp/mytmp.XXXX)</span><br><span class="line">#echo $myfile</span><br><span class="line">#/tmp/mytmp.3i7N</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 
       
