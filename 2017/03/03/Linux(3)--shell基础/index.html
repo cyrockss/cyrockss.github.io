@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="本文介绍shell和bash的基本概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T05:46:29.049Z">
+<meta property="og:updated_time" content="2018-07-16T02:31:09.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux(3)--shell基础">
 <meta name="twitter:description" content="本文介绍shell和bash的基本概念">
@@ -419,7 +419,49 @@
 </li>
 </ul>
 <p><strong>查看当前shell：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#echo $SHELL</span><br><span class="line">或者</span><br><span class="line">#echo $0</span><br></pre></td></tr></table></figure></p>
-<h3 id="bash基础"><a href="#bash基础" class="headerlink" title="bash基础"></a>bash基础</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4>
+<h3 id="bash基础"><a href="#bash基础" class="headerlink" title="bash基础"></a>bash基础</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><blockquote>
+<p>变量名：指向的内存空间<br>变量赋值：name = value<br>变量类型：存储的格式，数据的范围，参与的运算<br>变量替换：变量名出现位置替换为其所指的内存空间的数据<br>变量引用：${VARNAME} $VARNAME<br>变量名需遵循变量命名法则</p>
+</blockquote>
+<p><strong>变量类型</strong><br>根据编程语言分类：</p>
+<ul>
+<li>强类型变量</li>
+<li>弱类型变量</li>
+</ul>
+<p><strong>bash变量为字符串，无需事先声明</strong></p>
+<blockquote>
+<p><strong>根据作用域分类：</strong></p>
+</blockquote>
+<p>本地变量：当前shell进程<br>环境变量：当前shell进程和子进程<br>局部变量：某代码片段</p>
+<p><strong>位置参数变量：执行脚本向shell进程传递的参数</strong><br>$n：n为数字，$0代表命令本身，$1-$9代表带一个到第九个参数，十以上的参数需要使用大括号表示，比如${10}<br>$*：这个变量代表命令行中所有的参数，把所有的参数看成一个整体<br>$@：这个变量也代表命令行中所有的参数，是把每个参数却分对待<br>$#：这个变量代表命令行中所有参数的个数</p>
+<p><strong>特殊变量：shell内置的有特殊功能的变量</strong><br>$?：0表示成功，1-255表示失败</p>
+<p><strong>本地变量：</strong><br>变量赋值：name = value<br>“”：变量名会替换值<br>‘’：变量名不会替换值<br>查看变量：set VARNAME<br>撤销变量：unset VARNAME</p>
+<p><strong>环境变量：</strong><br>变量赋值：</p>
+<ul>
+<li>export name=value</li>
+<li>declare -x name=value</li>
+</ul>
+<p><strong>注意：bash内嵌了许多环境变量用于定义工作环境</strong></p>
+<p><strong>只读变量：</strong></p>
+<ul>
+<li>declare -r name</li>
+<li>readonly name</li>
+</ul>
+<p>只读变量无法重新赋值，无法撤销，存活时间为当前shell进程生命周期</p>
+<h4 id="多命令执行"><a href="#多命令执行" class="headerlink" title="多命令执行"></a>多命令执行</h4><p>COMMAND1; COMMAND2; COMMAND3…</p>
+<h4 id="bash配置文件"><a href="#bash配置文件" class="headerlink" title="bash配置文件"></a>bash配置文件</h4><ul>
+<li><p>profilel类：为交互式登录的shell提供配置<br>作用：用于定义环境变量，用于运行命令或脚本<br>全局：对所有用户都生效<br>/etc/profile<br>/etc/profile.d/*.sh<br>用户：仅对仅对当前用户有效<br>~/.bash_profile</p>
+</li>
+<li><p>bashrc类：为非交互式登录的shell提供配置<br>作用：定义本地变量，定义命令别名<br>全局：/etc/bashrc<br>用户：~/.bashrc</p>
+</li>
+</ul>
+<p><strong>注意：仅管理员可修改全局配置文件</strong></p>
+<blockquote>
+<p><strong>配置文件读取顺序：</strong></p>
+</blockquote>
+<p>交互式登录shell进程：<br>/etc/profile -&gt; /etc/profile.d/*.sh -&gt; ~/.bash_profile -&gt; ~/.bashrc -&gt; /etc/bashrc</p>
+<p>非交互式登录shell进程：<br>~/.bashrc -&gt; /etc/bashrc -&gt; /etc/profile.d/*.sh</p>
+<p>命令行中定义的特性，如变量和别名，作用域为当前shell进程的生命周期<br>配置文件定义的特性，只对随后新启动的shell进程有效<br>要让配置文件定义的特性立即生效,可以让shell重读配置文件</p>
+
       
     </div>
     
@@ -593,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文介绍shell和bash的基本概念"><span class="nav-number">1.</span> <span class="nav-text">本文介绍shell和bash的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言分类"><span class="nav-number">2.</span> <span class="nav-text">编程语言分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本"><span class="nav-number">3.</span> <span class="nav-text">shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash基础"><span class="nav-number">4.</span> <span class="nav-text">bash基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">4.1.</span> <span class="nav-text">变量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文介绍shell和bash的基本概念"><span class="nav-number">1.</span> <span class="nav-text">本文介绍shell和bash的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言分类"><span class="nav-number">2.</span> <span class="nav-text">编程语言分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本"><span class="nav-number">3.</span> <span class="nav-text">shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash基础"><span class="nav-number">4.</span> <span class="nav-text">bash基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">4.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多命令执行"><span class="nav-number">4.2.</span> <span class="nav-text">多命令执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bash配置文件"><span class="nav-number">4.3.</span> <span class="nav-text">bash配置文件</span></a></li></ol></li></ol></div>
             
 
           </div>
