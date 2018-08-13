@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文介绍磁盘，磁盘管理，文件系统，文件系统管理">
+<meta name="description" content="本文介绍文件系统，文件系统管理">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux(4)--磁盘与文件系统">
+<meta property="og:title" content="Linux(4)--文件系统">
 <meta property="og:url" content="http://yoursite.com/2017/03/18/Linux(4)--磁盘与文件系统/index.html">
 <meta property="og:site_name" content="坏默默">
-<meta property="og:description" content="本文介绍磁盘，磁盘管理，文件系统，文件系统管理">
+<meta property="og:description" content="本文介绍文件系统，文件系统管理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T09:17:03.257Z">
+<meta property="og:updated_time" content="2018-07-20T08:24:44.192Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux(4)--磁盘与文件系统">
-<meta name="twitter:description" content="本文介绍磁盘，磁盘管理，文件系统，文件系统管理">
+<meta name="twitter:title" content="Linux(4)--文件系统">
+<meta name="twitter:description" content="本文介绍文件系统，文件系统管理">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Linux(4)--磁盘与文件系统 | 坏默默</title>
+  <title>Linux(4)--文件系统 | 坏默默</title>
   
 
 
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux(4)--磁盘与文件系统</h1>
+          <h1 class="post-title" itemprop="name headline">Linux(4)--文件系统</h1>
         
 
         <div class="post-meta">
@@ -369,7 +369,7 @@
       
 
       
-        <p><strong>本文介绍磁盘，磁盘管理，文件系统，文件系统管理</strong></p>
+        <p><strong>本文介绍文件系统，文件系统管理</strong></p>
 <a id="more"></a>
 <hr>
 <h3 id="基本目录结构"><a href="#基本目录结构" class="headerlink" title="基本目录结构"></a>基本目录结构</h3><p>/bin，/sbin：二进制程序，操作系统自身运行就需要的程序<br>/usr/bin，/usr/sbin：基本系统工具<br>/usr/local/bin，/usr/local/sbin：第三方程序<br>PS：*/sbin是root存放管理程序的目录</p>
@@ -408,7 +408,26 @@
 <li>/dev/random：随机数设备</li>
 <li>/dev/urandom：随机数设备</li>
 </ul>
-<h3 id="磁盘系统"><a href="#磁盘系统" class="headerlink" title="磁盘系统"></a>磁盘系统</h3>
+<h3 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h3><p><strong>硬盘：随机存取设备</strong><br>I/O：</p>
+<ul>
+<li>I/O控制器</li>
+<li>I/O适配器</li>
+</ul>
+<blockquote>
+<p>Trcak：磁道<br>Sector：扇区<br>Cylinder：柱面<br>RPM：转速</p>
+</blockquote>
+<p><strong>硬件接口：</strong></p>
+<ul>
+<li>IDE，ATA：并行，133M/s</li>
+<li>SCSI：Small Computer System Interface 并行，320M/s</li>
+<li>SATA：串行，300M/s，600M/s，6Gb/s</li>
+<li>SAS：SCSI串行版</li>
+<li>USB：（1.0,2.0,3.0）</li>
+</ul>
+<p><strong>在Linux下/dev/显示：</strong><br>IDE，ATA：/dev/hd[a-z]<br>SCSI，SAS，SATA，USB：/dev/sd[a-z]<br>第一个IDE控制接硬盘<br>第二个IDE控制接光驱</p>
+<h3 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h3><p><strong>文件系统：通常由内核提供</strong><br><strong>Windows：</strong><br>NTFS，FAT32</p>
+<p><strong>Linux：</strong><br>ext2，ext3，ext4，xfs，reiserfs，nfs，iso9600，jfs，brtfs</p>
+
       
     </div>
     
@@ -447,6 +466,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/25/python操作xml文件/" rel="prev" title="python操作xml文件">
+                python操作xml文件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -527,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -538,7 +561,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -549,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -582,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本目录结构"><span class="nav-number">1.</span> <span class="nav-text">基本目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘系统"><span class="nav-number">2.</span> <span class="nav-text">磁盘系统</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本目录结构"><span class="nav-number">1.</span> <span class="nav-text">基本目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘"><span class="nav-number">2.</span> <span class="nav-text">磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统"><span class="nav-number">3.</span> <span class="nav-text">文件系统</span></a></li></ol></div>
             
 
           </div>
