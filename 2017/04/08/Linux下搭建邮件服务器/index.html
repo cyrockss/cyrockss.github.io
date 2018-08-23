@@ -88,7 +88,7 @@
 <meta property="og:description" content="本文介绍在Linux下搭建邮件服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/VoYRvHV.png">
-<meta property="og:updated_time" content="2018-08-23T02:24:34.521Z">
+<meta property="og:updated_time" content="2018-08-23T08:53:03.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下搭建邮件服务器">
 <meta name="twitter:description" content="本文介绍在Linux下搭建邮件服务器">
@@ -398,13 +398,15 @@
 <p>修改配置文件</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/postfix/main.cf</span><br><span class="line"></span><br><span class="line">#设置系统的主机名</span><br><span class="line">myhostname = sample.mail.com</span><br><span class="line"></span><br><span class="line">#设置域名（E-mail地址“@”后面的部分）</span><br><span class="line">mydomain = mail.com</span><br><span class="line"></span><br><span class="line">#将发信地址“@”后面的部分设置为域名（非系统主机名）</span><br><span class="line">myorigin = $mydomain</span><br><span class="line"></span><br><span class="line">#接受来自所有网络的请求</span><br><span class="line">inet_interfaces = all</span><br><span class="line"></span><br><span class="line">#指定发给本地邮件的域名</span><br><span class="line">mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain</span><br><span class="line"></span><br><span class="line">#指定用户邮箱目录</span><br><span class="line">home_mailbox = MAILDIR</span><br></pre></td></tr></table></figure>
+<p>样例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">myhostname = hehe.cymail.com</span><br><span class="line">mydomain = cymail.com</span><br><span class="line">myorigin = $mydomain</span><br><span class="line">inet_interfaces = all</span><br><span class="line">mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain</span><br><span class="line">home_mailbox = /home/rock/mail/</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>重启postfix<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service postfix stop</span><br><span class="line">service postfix start</span><br></pre></td></tr></table></figure></p>
+<p>重启postfix</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service postfix stop</span><br><span class="line">service postfix start</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>为本机添加DNS Server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
+<p>为本机添加DNS Server</p>
 </blockquote>
-<p>添加Google Free DNS Server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.4.4</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加Google Free DNS Server</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.4.4</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#echo &quot;test&quot; | mail -s &quot;test&quot; xxxx@xxx.com</span><br></pre></td></tr></table></figure></p>
 </blockquote>
@@ -417,11 +419,13 @@
 </blockquote>
 <p>mailq:显示当前在postfix发送队列中的所有邮件<br>postsuper -d ALL:删除当前等待发送队列的所有邮件，包括发送失败的退信</p>
 <h3 id="使用外部公用邮件服务器"><a href="#使用外部公用邮件服务器" class="headerlink" title="使用外部公用邮件服务器"></a>使用外部公用邮件服务器</h3><blockquote>
-<p>关闭本地邮件服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#service sendmail stop</span><br><span class="line">#service postfix stop</span><br></pre></td></tr></table></figure></p>
+<p>关闭本地邮件服务器</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#service sendmail stop</span><br><span class="line">#service postfix stop</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>修改mail的配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/mail.rc</span><br><span class="line"></span><br><span class="line">set from=sample@163.com </span><br><span class="line">set smtp=smtp.163.com</span><br><span class="line">set smtp-auth-user=sample@163.com</span><br><span class="line">set smtp-auth-password=xxxxxx</span><br><span class="line">set smtp-auth=login</span><br><span class="line"></span><br><span class="line">from: 对方收到邮件时显示的发件人</span><br><span class="line">smtp: 指定第三方发送邮件的smtp服务器地址</span><br><span class="line">smtp-auth: SMTP的认证方式。默认是LOGIN，也可改为CRAM-MD5或PLAIN方式</span><br><span class="line">smtp-auth-user: 第三方发邮件的用户名</span><br><span class="line">smtp-auth-password: 用户名对应密码</span><br></pre></td></tr></table></figure></p>
+<p>修改mail的配置文件</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/mail.rc</span><br><span class="line"></span><br><span class="line">set from=sample@163.com </span><br><span class="line">set smtp=smtp.163.com</span><br><span class="line">set smtp-auth-user=sample@163.com</span><br><span class="line">set smtp-auth-password=xxxxxx</span><br><span class="line">set smtp-auth=login</span><br><span class="line"></span><br><span class="line">from: 对方收到邮件时显示的发件人</span><br><span class="line">smtp: 指定第三方发送邮件的smtp服务器地址</span><br><span class="line">smtp-auth: SMTP的认证方式。默认是LOGIN，也可改为CRAM-MD5或PLAIN方式</span><br><span class="line">smtp-auth-user: 第三方发邮件的用户名</span><br><span class="line">smtp-auth-password: 用户名对应密码</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>邮箱设置</p>
 </blockquote>
