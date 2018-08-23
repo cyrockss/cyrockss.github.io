@@ -88,7 +88,7 @@
 <meta property="og:description" content="本文介绍在Linux下搭建邮件服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/VoYRvHV.png">
-<meta property="og:updated_time" content="2018-08-23T08:57:18.958Z">
+<meta property="og:updated_time" content="2018-08-23T08:59:20.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下搭建邮件服务器">
 <meta name="twitter:description" content="本文介绍在Linux下搭建邮件服务器">
@@ -417,19 +417,19 @@
 </blockquote>
 <p>日志文件：/var/log/maillog<br>发送成功会返回250和OK</p>
 <blockquote>
-<p>维护</p>
+<p><strong>维护</strong></p>
 </blockquote>
 <p>mailq:显示当前在postfix发送队列中的所有邮件<br>postsuper -d ALL:删除当前等待发送队列的所有邮件，包括发送失败的退信</p>
 <h3 id="使用外部公用邮件服务器"><a href="#使用外部公用邮件服务器" class="headerlink" title="使用外部公用邮件服务器"></a>使用外部公用邮件服务器</h3><blockquote>
-<p>关闭本地邮件服务器</p>
+<p><strong>关闭本地邮件服务器</strong></p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#service sendmail stop</span><br><span class="line">#service postfix stop</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>修改mail的配置文件</p>
+<p><strong>修改mail的配置文件</strong></p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/mail.rc</span><br><span class="line"></span><br><span class="line">set from=sample@163.com </span><br><span class="line">set smtp=smtp.163.com</span><br><span class="line">set smtp-auth-user=sample@163.com</span><br><span class="line">set smtp-auth-password=xxxxxx</span><br><span class="line">set smtp-auth=login</span><br><span class="line"></span><br><span class="line">from: 对方收到邮件时显示的发件人</span><br><span class="line">smtp: 指定第三方发送邮件的smtp服务器地址</span><br><span class="line">smtp-auth: SMTP的认证方式。默认是LOGIN，也可改为CRAM-MD5或PLAIN方式</span><br><span class="line">smtp-auth-user: 第三方发邮件的用户名</span><br><span class="line">smtp-auth-password: 用户名对应密码</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>邮箱设置</p>
+<p><strong>邮箱设置</strong></p>
 </blockquote>
 <p>登录邮箱开启POP3/SMTP服务<br><img src="https://i.imgur.com/VoYRvHV.png" alt="邮箱设置"></p>
 
