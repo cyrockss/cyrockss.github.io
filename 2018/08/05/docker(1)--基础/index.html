@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="docker," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文介绍shell和bash的基本概念">
-<meta name="keywords" content="Linux">
+<meta name="description" content="本文介绍docker的基础知识和常用命令">
+<meta name="keywords" content="docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux(3)--shell基础">
-<meta property="og:url" content="http://yoursite.com/2017/03/03/Linux(3)--shell基础/index.html">
+<meta property="og:title" content="docker(1)--基础">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/docker(1)--基础/index.html">
 <meta property="og:site_name" content="坏默默">
-<meta property="og:description" content="本文介绍shell和bash的基本概念">
+<meta property="og:description" content="本文介绍docker的基础知识和常用命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T09:17:31.823Z">
+<meta property="og:updated_time" content="2018-08-28T01:48:00.680Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux(3)--shell基础">
-<meta name="twitter:description" content="本文介绍shell和bash的基本概念">
+<meta name="twitter:title" content="docker(1)--基础">
+<meta name="twitter:description" content="本文介绍docker的基础知识和常用命令">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/03/Linux(3)--shell基础/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/docker(1)--基础/"/>
 
 
 
 
 
-  <title>Linux(3)--shell基础 | 坏默默</title>
+  <title>docker(1)--基础 | 坏默默</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/Linux(3)--shell基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/docker(1)--基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cyrockss">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux(3)--shell基础</h1>
+          <h1 class="post-title" itemprop="name headline">docker(1)--基础</h1>
         
 
         <div class="post-meta">
@@ -309,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T19:10:34+08:00">
-                2017-03-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:25:22+08:00">
+                2018-08-05
               </time>
             
 
@@ -332,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -369,99 +369,9 @@
       
 
       
-        <p><strong>本文介绍shell和bash的基本概念</strong> </p>
+        <p><strong>本文介绍docker的基础知识和常用命令</strong></p>
 <a id="more"></a>
 <hr>
-<h3 id="编程语言分类"><a href="#编程语言分类" class="headerlink" title="编程语言分类"></a>编程语言分类</h3><p><strong>按运行方式分类：</strong></p>
-<ul>
-<li>编译运行：源代码 -&gt; 编译 -&gt; 程序文件</li>
-<li>解释运行：源代码 -&gt; 边解释边运行</li>
-</ul>
-<p><strong>按编程功能分类：</strong></p>
-<ul>
-<li>shell编程：利用系统上的命令和编程组件进行编程</li>
-<li>完整编程：利用库和编程组件进行编程</li>
-</ul>
-<p><strong>按编程模型分类：</strong></p>
-<ul>
-<li>面向过程：以指令为中心，数据服务代码</li>
-<li>面向对象：以数据为中心，围绕数据组织</li>
-</ul>
-<blockquote>
-<p><strong>shell：解释运行，依赖于外部程序文件的过程式编程</strong><br><strong>shell脚本实际上是命令的堆积，但由于很多命令不具有幂等性，需要逻辑来判断运行条件是否满足，以避免命令执行发生的错误</strong></p>
-</blockquote>
-<h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><p>shell脚本通常是一个以shebang开头的文本文件<br>形如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure></p>
-<p>其中/bin/bash是bash解释器的路径</p>
-<p><strong>PS:shebang是#!两个字符名称的组合</strong><br><strong>在Unix中，#读作sharp或hash，!读作bang</strong></p>
-<p><strong>常见的解释器：</strong></p>
-<ul>
-<li>/bin/bash</li>
-<li>/bin/csh</li>
-<li>/usr/bin/python</li>
-<li>/usr/bn/perl</li>
-</ul>
-<p><strong>运行脚本的两种方式：</strong></p>
-<ol>
-<li>赋予执行权限，直接执行</li>
-<li>直接运行解释器程序，将脚本以命令行参数传递给解释器运行</li>
-</ol>
-<p><strong>登录类型：</strong></p>
-<ul>
-<li>交互式登录<ul>
-<li>某终端账号密码登录</li>
-<li>su - USERNAME</li>
-</ul>
-</li>
-<li>非交互式登录<ul>
-<li>su USERNAME</li>
-<li>图形界面打开的终端</li>
-<li>运行脚本</li>
-</ul>
-</li>
-</ul>
-<p><strong>查看当前shell：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#echo $SHELL</span><br><span class="line">或者</span><br><span class="line">#echo $0</span><br></pre></td></tr></table></figure></p>
-<h3 id="bash基础"><a href="#bash基础" class="headerlink" title="bash基础"></a>bash基础</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><blockquote>
-<p>变量名：指向的内存空间<br>变量赋值：name = value<br>变量类型：存储的格式，数据的范围，参与的运算<br>变量替换：变量名出现位置替换为其所指的内存空间的数据<br>变量引用：${VARNAME} $VARNAME<br>变量名需遵循变量命名法则</p>
-</blockquote>
-<p><strong>变量类型</strong><br>根据编程语言分类：</p>
-<ul>
-<li>强类型变量</li>
-<li>弱类型变量</li>
-</ul>
-<p><strong>bash变量为字符串，无需事先声明</strong></p>
-<blockquote>
-<p><strong>根据作用域分类：</strong></p>
-</blockquote>
-<p>本地变量：当前shell进程<br>环境变量：当前shell进程和子进程<br>局部变量：某代码片段</p>
-<p><strong>位置参数变量：执行脚本向shell进程传递的参数</strong><br>$n：n为数字，$0代表命令本身，$1-$9代表带一个到第九个参数，十以上的参数需要使用大括号表示，比如${10}<br>$*：这个变量代表命令行中所有的参数，把所有的参数看成一个整体<br>$@：这个变量也代表命令行中所有的参数，是把每个参数却分对待<br>$#：这个变量代表命令行中所有参数的个数</p>
-<p><strong>特殊变量：shell内置的有特殊功能的变量</strong><br>$?：0表示成功，1-255表示失败</p>
-<p><strong>本地变量：</strong><br>变量赋值：name = value<br>“”：变量名会替换值<br>‘’：变量名不会替换值<br>查看变量：set VARNAME<br>撤销变量：unset VARNAME</p>
-<p><strong>环境变量：</strong><br>变量赋值：</p>
-<ul>
-<li>export name=value</li>
-<li>declare -x name=value</li>
-</ul>
-<p><strong>注意：bash内嵌了许多环境变量用于定义工作环境</strong></p>
-<p><strong>只读变量：</strong></p>
-<ul>
-<li>declare -r name</li>
-<li>readonly name</li>
-</ul>
-<p>只读变量无法重新赋值，无法撤销，存活时间为当前shell进程生命周期</p>
-<h4 id="多命令执行"><a href="#多命令执行" class="headerlink" title="多命令执行"></a>多命令执行</h4><p>COMMAND1; COMMAND2; COMMAND3…</p>
-<h4 id="bash配置文件"><a href="#bash配置文件" class="headerlink" title="bash配置文件"></a>bash配置文件</h4><ul>
-<li><p>profilel类：为交互式登录的shell提供配置<br>作用：用于定义环境变量，用于运行命令或脚本<br>全局：对所有用户都生效<br>/etc/profile<br>/etc/profile.d/*.sh<br>用户：仅对仅对当前用户有效<br>~/.bash_profile</p>
-</li>
-<li><p>bashrc类：为非交互式登录的shell提供配置<br>作用：定义本地变量，定义命令别名<br>全局：/etc/bashrc<br>用户：~/.bashrc</p>
-</li>
-</ul>
-<p><strong>注意：仅管理员可修改全局配置文件</strong></p>
-<blockquote>
-<p><strong>配置文件读取顺序：</strong></p>
-</blockquote>
-<p>交互式登录shell进程：<br>/etc/profile -&gt; /etc/profile.d/*.sh -&gt; ~/.bash_profile -&gt; ~/.bashrc -&gt; /etc/bashrc</p>
-<p>非交互式登录shell进程：<br>~/.bashrc -&gt; /etc/bashrc -&gt; /etc/profile.d/*.sh</p>
-<p>命令行中定义的特性，如变量和别名，作用域为当前shell进程的生命周期<br>配置文件定义的特性，只对随后新启动的shell进程有效<br>要让配置文件定义的特性立即生效,可以让shell重读配置文件</p>
 
       
     </div>
@@ -479,7 +389,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
         </div>
       
@@ -492,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/17/Linux(2)--用户、权限、组/" rel="next" title="Linux(2)--用户、权限、组">
-                <i class="fa fa-chevron-left"></i> Linux(2)--用户、权限、组
+              <a href="/2018/06/23/wxpython/" rel="next" title="wxpython">
+                <i class="fa fa-chevron-left"></i> wxpython
               </a>
             
           </div>
@@ -501,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/18/Linux(4)--磁盘与文件系统/" rel="prev" title="Linux(4)--磁盘与文件系统">
-                Linux(4)--磁盘与文件系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -556,17 +462,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,22 +527,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言分类"><span class="nav-number">1.</span> <span class="nav-text">编程语言分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本"><span class="nav-number">2.</span> <span class="nav-text">shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash基础"><span class="nav-number">3.</span> <span class="nav-text">bash基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多命令执行"><span class="nav-number">3.2.</span> <span class="nav-text">多命令执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bash配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">bash配置文件</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
