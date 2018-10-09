@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="本文介绍Linux包管理系统">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-24T09:04:07.891Z">
+<meta property="og:updated_time" content="2018-10-09T02:59:51.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux(6)--包管理">
 <meta name="twitter:description" content="本文介绍Linux包管理系统">
@@ -372,6 +372,67 @@
         <p><strong>本文介绍Linux包管理系统</strong></p>
 <a id="more"></a>
 <hr>
+<h2 id="rpm命令实现程序管理"><a href="#rpm命令实现程序管理" class="headerlink" title="rpm命令实现程序管理"></a>rpm命令实现程序管理</h2><p>安装：-ivh，–nodeps，==replacepkgs<br>卸载：-e，–nodeps<br>升级：-Uvh，-Fvh<br>查询：-q，-qa，-qf，-qi，-qd，-qc<br>检验：-V<br>导入GPG秘钥：–import，-K<br>数据库重建：–initdb，–rebuilddb</p>
+<h2 id="yum包管理工具"><a href="#yum包管理工具" class="headerlink" title="yum包管理工具"></a>yum包管理工具</h2><p>yum repository：yum repo<br>储存了众多的rpm包以及相关的元数据文件（放置在特定的目录下：repodata）</p>
+<blockquote>
+<p><strong>文件服务器：</strong></p>
+</blockquote>
+<p>ftp://<br>htttp://<br>nfs://<br>file://</p>
+<h3 id="yum命令用法"><a href="#yum命令用法" class="headerlink" title="yum命令用法"></a>yum命令用法</h3><p>repolist [all|disable|enable]：显示仓库列表<br>deplist：显示包与包的依赖关系<br>list：显示程序包<br>install：安装程序包<br>update：升级程序包<br>remove：卸载包组<br>info：查看程序包信息<br>provides：查看指定特性(或文件)由哪个程序包提供的<br>clean：清除缓存<br>makecache：构建缓存<br>search：搜索程序包(模糊匹配)<br>reinstall：重新安装程序包<br>downgrade：降级程序包<br>history：查看yum事务历史<br>grouplist：显示包组<br>groupinstall：安装包组<br>groupupdate：升级包组<br>groupinfo：查看包组信息<br>groupremove：卸载包组</p>
+<blockquote>
+<p><strong>yum的命令行选项：</strong></p>
+</blockquote>
+<p>–nogpgcheck：禁止gpgcheck<br>-y：自动回复yes<br>-q：静默模式<br>–noplugins：禁止所有插件<br>–disablerepo=repoidglob：临时禁用此仓库<br>–enablerepo=repoidglob：临时启用此仓库</p>
+<h3 id="yum的repo配置文件"><a href="#yum的repo配置文件" class="headerlink" title="yum的repo配置文件"></a>yum的repo配置文件</h3><blockquote>
+<p><strong>yum客户端：</strong></p>
+</blockquote>
+<p>配置文件：<br>/etc/yum.conf：为所有仓库提供公共配置<br>/etc/yum.repos.d/*.repo：yum仓库指向</p>
+<blockquote>
+<p><strong>仓库的定义：</strong></p>
+</blockquote>
+<p>[repositoryID]<br>name<br>baseurl=url://path/to/repository/<br>enabled={1|0}<br>gpgcheck={1|0}<br>gpgkey=URL<br>enablegroup={1|0}<br>cost</p>
+<blockquote>
+<p><strong>可使用的变量：</strong></p>
+</blockquote>
+<p>$releasever：当前OS的发行版主版本号<br>$arch：平台<br>$basearch：基础平台<br>$YUM0-$YUM9</p>
+<blockquote>
+<p><strong>创建yum仓库：</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#yum createrepo</span><br><span class="line">#createrepo [option] &lt;directory&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="源代码组织格式"><a href="#源代码组织格式" class="headerlink" title="源代码组织格式"></a>源代码组织格式</h3><p>多文件：源码中的代码之间很可能存在跨文件依赖关系</p>
+<p>C，C++：make（configure –&gt; Makefile.in –&gt; makefile）<br>java：maven</p>
+<p>源代码 –&gt; 预处理 –&gt; 编译 –&gt; 汇编 –&gt; 链接</p>
+<blockquote>
+<p><strong>编译安装三步骤：</strong></p>
+</blockquote>
+<ul>
+<li>./configure：首先根据选项传递参数，指定启用特性、安装路径等，执行时会参考用户的指定以及Makefile.in生成makefile，然后检查依赖到的外部环境</li>
+<li>make：根据makefile文件构建应用程序</li>
+<li>make install</li>
+</ul>
+<p><strong>开发工具：</strong><br>autoconf：生成configure脚本<br>automake：生成Makefile.in</p>
+<p>建议：安装前查看INSTALL，README</p>
+<p>开发程序源代码的获取：</p>
+<ul>
+<li>官方自建站点：</li>
+<li>代码托管：<ul>
+<li>SourceForge</li>
+<li>Github.com</li>
+<li>code.google.com</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装后配置"><a href="#安装后配置" class="headerlink" title="安装后配置"></a>安装后配置</h3><ol>
+<li>将二进制程序目录加到PATH环境变量中</li>
+<li><p>导出库文件路径：编辑/etc/ld.so.conf.d/NAME.conf，添加新的库文件所在目录至此文件中，让系统重新生成缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#ldconfig [-v]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导出头文件：基于链接的方式实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#ln -sv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导出帮助手册：编辑/etc/man.config文件，添加一个MANPATH</p>
+</li>
+</ol>
 
       
     </div>
@@ -466,8 +527,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -531,6 +601,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rpm命令实现程序管理"><span class="nav-number">1.</span> <span class="nav-text">rpm命令实现程序管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yum包管理工具"><span class="nav-number">2.</span> <span class="nav-text">yum包管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yum命令用法"><span class="nav-number">2.1.</span> <span class="nav-text">yum命令用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum的repo配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">yum的repo配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码组织格式"><span class="nav-number">2.3.</span> <span class="nav-text">源代码组织格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装后配置"><span class="nav-number">2.4.</span> <span class="nav-text">安装后配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
