@@ -79,21 +79,22 @@
 
 
 
-<meta name="description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，答题按钮点击处理">
+<meta name="description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，构造游戏结束界面">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用wxpython写答题小游戏(2)">
-<meta property="og:url" content="http://yoursite.com/2019/01/08/用wxpython写答题小游戏(2)/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/01/06/用wxpython写答题小游戏(2)/index.html">
 <meta property="og:site_name" content="坏默默">
-<meta property="og:description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，答题按钮点击处理">
+<meta property="og:description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，构造游戏结束界面">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/V2ePs7H.jpg">
+<meta property="og:image" content="https://i.imgur.com/ac4rM50.jpg">
 <meta property="og:image" content="https://i.imgur.com/ACtuSFk.jpg">
-<meta property="og:updated_time" content="2019-01-14T15:07:43.082Z">
+<meta property="og:image" content="https://i.imgur.com/cmMLwbF.jpg">
+<meta property="og:updated_time" content="2019-01-14T16:08:35.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用wxpython写答题小游戏(2)">
-<meta name="twitter:description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，答题按钮点击处理">
-<meta name="twitter:image" content="https://i.imgur.com/V2ePs7H.jpg">
+<meta name="twitter:description" content="本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，构造游戏结束界面">
+<meta name="twitter:image" content="https://i.imgur.com/ac4rM50.jpg">
 
 
 
@@ -123,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/08/用wxpython写答题小游戏(2)/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/06/用wxpython写答题小游戏(2)/"/>
 
 
 
@@ -283,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/用wxpython写答题小游戏(2)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/用wxpython写答题小游戏(2)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cyrockss">
@@ -312,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T21:11:18+08:00">
-                2019-01-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T21:11:18+08:00">
+                2019-01-06
               </time>
             
 
@@ -372,17 +373,34 @@
       
 
       
-        <p><strong>本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，答题按钮点击处理</strong></p>
+        <p><strong>本文讲解怎么用wxpython写一个答题小游戏(2)–panel添加背景的方法，倒计时的实现，构造游戏结束界面</strong></p>
 <a id="more"></a>
 <hr>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>上一篇，我们将游戏开始界面和游戏界面都构造好了，已经可以在游戏开始界面通过点击游戏开始按钮跳转到游戏界面，但是游戏界面不美观，倒计时功能没用，答题按钮点击事件未处理，这一篇，我们把这三个问题处理完。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>上一篇，我们将游戏开始界面和游戏界面都构造好了，已经可以在游戏开始界面通过点击游戏开始按钮跳转到游戏界面，但是游戏界面不美观，倒计时功能没用，这一篇，我们把这两个个问题处理完，再构造出游戏结束界面。</p>
 <h3 id="给panel添加背景"><a href="#给panel添加背景" class="headerlink" title="给panel添加背景"></a>给panel添加背景</h3><p>给panel绑定背景事件，然后通过dc绘画的方式把图片设置为背景，使用方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class GameFrame(wx.Frame):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        wx.Frame.__init__(self, None, -1, &quot;Knowledge&quot;, pos=(500, 150), size=(400, 600))</span><br><span class="line">        self.answer_panel = wx.Panel(self, -1)</span><br><span class="line">        self.answer_panel.Bind(wx.EVT_ERASE_BACKGROUND, self.showBackground)</span><br><span class="line"></span><br><span class="line">    # panel背景</span><br><span class="line">    def showBackground(self, event):</span><br><span class="line">        dc = event.GetDC()</span><br><span class="line">        if not dc:</span><br><span class="line">            dc = wx.ClientDC(self)</span><br><span class="line">            rect = self.GetUpdateRegion().GetBox()</span><br><span class="line">            dc.SetClippingRect(rect)</span><br><span class="line">        dc.Clear()</span><br><span class="line">        bmp = wx.Bitmap(&quot;bg2.jpg&quot;)</span><br><span class="line">        dc.DrawBitmap(bmp, 0, 0)</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p><strong>效果如图：</strong><br><img src="https://i.imgur.com/V2ePs7H.jpg" alt="panel"></p>
+<p><strong>效果如图：</strong><br><img src="https://i.imgur.com/ac4rM50.jpg" alt="panel背景"></p>
 </blockquote>
 <blockquote>
 <p><strong>案例使用的背景图</strong><br><img src="https://i.imgur.com/ACtuSFk.jpg" alt="案例背景图"></p>
 </blockquote>
+<p><strong>PS：在添加背景的时候，要注意静态文本框颜色和背景颜色的搭配</strong></p>
+<h3 id="倒计时功能"><a href="#倒计时功能" class="headerlink" title="倒计时功能"></a>倒计时功能</h3><p>倒计时功能我们可以使用wx的定时器类Timer，这里不建议使用多线程threading模块的Timer类</p>
+<blockquote>
+<p><strong>使用threading模块Timer类会遇到的问题</strong><br>这是我踩过的一个坑，一开始我不知道wx有Timer类，所以使用常规的threading的Timer类。threading的Timer可以实现在多长时间后启动一个线程来执行一个方法，于是我们可以通过一个递归来实现倒计时的功能。(PS：有人会问为啥不新启一个线程用sleep方法，因为窗体中使用sleep方法会导致控件卡死加载不出来）<br>我们游戏时会出现一种情况，当我们没有复活卡回答一道题时，若倒计时时间到我们仍未回答，此时应该显示正确答案，然后跳转到游戏结束界面，显示答对多少题。倒计时时间等于0的处理放在倒计时的方法中，会比较直观。如果我们使用threading的Timer来实现倒计时的方法，会出现一个问题，我们调用的结束游戏方法会跳转到游戏结束界面(事实上是新建游戏结束界面)，我们新建的游戏结束界面是在子线程中新建的，子线程结束，游戏结束界面也会消失，即倒计时时间等于0时，游戏结束界面闪一下就会消失。<br><strong>这个不太好描述，看不懂没啥影响</strong></p>
+</blockquote>
+<p><strong>倒计时功能实现方法：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class GameFrame(wx.Frame):</span><br><span class="line">    def __init__(self):</span><br><span class="line">		self.signal = True</span><br><span class="line">        self.left_time = know_conf.LEFT_TIME</span><br><span class="line">        wx.Frame.__init__(self, None, -1, &quot;Knowledge&quot;, pos=(500, 150), size=(400, 600))</span><br><span class="line">        self.answer_panel = wx.Panel(self, -1)</span><br><span class="line">        self.basic_font = wx.Font(20, wx.SWISS, wx.NORMAL, wx.BOLD, False)</span><br><span class="line">        # 倒计时</span><br><span class="line">        self.time_label = wx.StaticText(self.answer_panel, -1, str(self.left_time), \</span><br><span class="line">                                        pos=(200, 30), size=(20, 30))</span><br><span class="line">        self.time_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.time_label.SetFont(self.basic_font)</span><br><span class="line"></span><br><span class="line">        self.timer = wx.Timer(self)</span><br><span class="line">        self.Bind(wx.EVT_TIMER, self.changeTime, self.timer)</span><br><span class="line">        self.timer.Start(1000)</span><br><span class="line"></span><br><span class="line">    # 倒计时</span><br><span class="line">    def changeTime(self, event):</span><br><span class="line">        if(self.signal==True and self.left_time&gt;0):</span><br><span class="line">            self.left_time -= 1</span><br><span class="line">            self.time_label.SetLabel(str(self.left_time))</span><br><span class="line">        if(self.signal==True and self.left_time==0):</span><br><span class="line">            pass</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>PS:</strong><br>通过wx.Timer()方法构造出一个定时器，并给定时器绑定一个定时任务changeTime方法<br>注意定时器的调用方法不能够加参数<br>这里我们加了一个signal标志，用于暂停计时器<br>定时器的start方法，入参为执行调用方法的间隔时间，单位是毫秒</p>
+</blockquote>
+<h3 id="构造游戏结束界面"><a href="#构造游戏结束界面" class="headerlink" title="构造游戏结束界面"></a>构造游戏结束界面</h3><p>在know_ui.py中构造游戏结束界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class OverFrame(wx.Frame):</span><br><span class="line">    def __init__(self, rightnum):</span><br><span class="line">        wx.Frame.__init__(self, None, -1, &quot;GAMEOVER&quot;, pos=(500,150), size=(400, 600))</span><br><span class="line">        self.over_panel = wx.Panel(self, -1)</span><br><span class="line">        self.over_panel.Bind(wx.EVT_ERASE_BACKGROUND, self.showBackground)</span><br><span class="line">        self.basic_font = wx.Font(30, wx.SWISS, wx.NORMAL, wx.BOLD, False)</span><br><span class="line">        # 答对题数</span><br><span class="line">        self.right_label = wx.StaticText(self.over_panel, -1, &quot;你答对了&quot;+str(rightnum)+&quot;题&quot;, \</span><br><span class="line">                                       pos=(70,80), size=(100,30))</span><br><span class="line">        self.right_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.right_label.SetFont(self.basic_font)</span><br><span class="line">        # 输赢</span><br><span class="line">        self.over_label = wx.StaticText(self.over_panel, -1, &quot;&quot;, \</span><br><span class="line">                                         pos=(130, 160), size=(100, 30))</span><br><span class="line">        self.over_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        if(rightnum==12):</span><br><span class="line">            self.over_label.SetLabel(&quot;你赢了&quot;)</span><br><span class="line">        else:</span><br><span class="line">            self.over_label.SetLabel(&quot;你输了&quot;)</span><br><span class="line">        self.over_label.SetFont(self.basic_font)</span><br><span class="line"></span><br><span class="line">    # 显示背景</span><br><span class="line">    def showBackground(self, event):</span><br><span class="line">        dc = event.GetDC()</span><br><span class="line">        if not dc:</span><br><span class="line">            dc = wx.ClientDC(self)</span><br><span class="line">            rect = self.GetUpdateRegion().GetBox()</span><br><span class="line">            dc.SetClippingRect(rect)</span><br><span class="line">        dc.Clear()</span><br><span class="line">        bmp = wx.Bitmap(&quot;bg2.jpg&quot;)</span><br><span class="line">        dc.DrawBitmap(bmp, 0, 0)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>效果如图：</strong><br><img src="https://i.imgur.com/cmMLwbF.jpg" alt="游戏结束界面"></p>
+</blockquote>
+<blockquote>
+<p><strong>PS:</strong><br>这个界面使用了和游戏界面同样的背景<br>创建了两个静态文本框，一个用于显示玩家答对多少题，一个用于显示玩家输赢</p>
+</blockquote>
+<p><strong>下一篇，我们讲解三个答题按钮的处理，倒计时时间到的处理，答错题使用复活卡的处理</strong></p>
 
       
     </div>
@@ -557,7 +575,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给panel添加背景"><span class="nav-number">2.</span> <span class="nav-text">给panel添加背景</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给panel添加背景"><span class="nav-number">2.</span> <span class="nav-text">给panel添加背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒计时功能"><span class="nav-number">3.</span> <span class="nav-text">倒计时功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造游戏结束界面"><span class="nav-number">4.</span> <span class="nav-text">构造游戏结束界面</span></a></li></ol></div>
             
 
           </div>
