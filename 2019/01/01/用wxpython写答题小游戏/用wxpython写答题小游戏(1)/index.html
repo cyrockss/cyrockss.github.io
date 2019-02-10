@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文讲解怎么用wxpython写一个答题小游戏(1)，构造游戏开始界面，构造游戏界面前的准备">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用wxpython写答题小游戏(1)">
+<meta property="og:url" content="http://yoursite.com/2019/01/01/用wxpython写答题小游戏/用wxpython写答题小游戏(1)/index.html">
+<meta property="og:site_name" content="坏默默">
+<meta property="og:description" content="本文讲解怎么用wxpython写一个答题小游戏(1)，构造游戏开始界面，构造游戏界面前的准备">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/zgX8wNE.jpg">
+<meta property="og:image" content="https://i.imgur.com/vE06Grn.jpg">
+<meta property="og:updated_time" content="2019-01-14T16:07:06.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用wxpython写答题小游戏(1)">
+<meta name="twitter:description" content="本文讲解怎么用wxpython写一个答题小游戏(1)，构造游戏开始界面，构造游戏界面前的准备">
+<meta name="twitter:image" content="https://i.imgur.com/zgX8wNE.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3KW5EB73UC',
+      apiKey: '026688d2ad324b40b629a6e94a4cebed',
+      indexName: 'Blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/01/用wxpython写答题小游戏/用wxpython写答题小游戏(1)/"/>
+
+
+
+
+
+  <title>用wxpython写答题小游戏(1) | 坏默默</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+  
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.4"></script>
+
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">坏默默</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">道理我都懂,但是何必呢</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/用wxpython写答题小游戏/用wxpython写答题小游戏(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cyrockss">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cy.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坏默默">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用wxpython写答题小游戏(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T14:12:21+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>本文讲解怎么用wxpython写一个答题小游戏(1)，构造游戏开始界面，构造游戏界面前的准备</strong></p>
+<a id="more"></a>
+<hr>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>公司最近有个答题赢积分的活动，奈何自己知识储备不够，老是打不过，就打算自己也写个答题的小游戏玩，顺便练习下新学的wxpython和多线程</p>
+<blockquote>
+<p><strong>游戏规则：</strong></p>
+<ol>
+<li>答对12题算赢</li>
+<li>每人1张复活卡，回答错误可以复活1次，继续答题</li>
+<li>每道题需在10s内回答，若没回答，视为回答错误</li>
+<li>错误答案标记为红色，正确答案显示绿色，回答错误会显示正确答案</li>
+</ol>
+</blockquote>
+<h3 id="架构方式"><a href="#架构方式" class="headerlink" title="架构方式"></a>架构方式</h3><p>我们采用传统的UI层，逻辑层，数据层三层架构</p>
+<blockquote>
+<p><strong>UI层：</strong><br>写主函数入口和构造的UI</p>
+</blockquote>
+<blockquote>
+<p><strong>数据层：</strong><br>写配置项和题库</p>
+</blockquote>
+<blockquote>
+<p><strong>逻辑层：</strong><br>处理一些UI层不方便处理的代码，比如说获取一个问题，这个在UI层不方便处理，我们可以放在逻辑层处理</p>
+</blockquote>
+<h3 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h3><blockquote>
+<p><strong>我们需要构造三个Frame：</strong></p>
+</blockquote>
+<p>第一个Frame是游戏准备界面，显示一个开始游戏按钮和一个设置按钮</p>
+<p>第二个Frame是游戏界面，需要显示以下元素：</p>
+<ul>
+<li>玩家当前回答到第几题</li>
+<li>倒计时</li>
+<li>复活卡剩余次数</li>
+<li>问题</li>
+<li>三个回答按钮</li>
+</ul>
+<p>第三个Frame是游戏结束界面，显示玩家答对了多少题，胜负判断</p>
+<h3 id="构造游戏开始界面"><a href="#构造游戏开始界面" class="headerlink" title="构造游戏开始界面"></a>构造游戏开始界面</h3><p>新建一个py文件命名为know_ui.py，构造游戏开始界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import wx</span><br><span class="line"></span><br><span class="line">class StartFrame(wx.Frame):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        wx.Frame.__init__(self, None, -1, &quot;Knowledge&quot;, pos=(500, 150), size=(400, 600))</span><br><span class="line">        # 新建一个panel</span><br><span class="line">        self.start_panel = wx.Panel(self, -1)</span><br><span class="line">        # 新建一种字体</span><br><span class="line">        self.basic_font = wx.Font(20, wx.SWISS, wx.NORMAL, wx.BOLD, False)</span><br><span class="line"></span><br><span class="line">        # 开始按钮</span><br><span class="line">        self.start_button = wx.Button(self.start_panel, -1, &quot;开始游戏&quot;, pos=(70, 150), size=(240, 80))</span><br><span class="line">        self.start_button.SetFont(self.basic_font)</span><br><span class="line"></span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.startGame, self.start_button)</span><br><span class="line">        # 设置按钮</span><br><span class="line">        self.set_button = wx.Button(self.start_panel, -1, &quot;设置&quot;, pos=(70, 300), size=(240, 80))</span><br><span class="line">        self.set_button.SetFont(self.basic_font)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.setting, self.set_button)</span><br><span class="line"></span><br><span class="line">    def startGame(self, event):</span><br><span class="line">        gameframe = GameFrame()</span><br><span class="line">        self.Close()</span><br><span class="line">        gameframe.Show()</span><br><span class="line"></span><br><span class="line">    def setting(self, event):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app = wx.PySimpleApp()</span><br><span class="line">    startframe = StartFrame()</span><br><span class="line">    startframe.Show()</span><br><span class="line">    app.MainLoop()</span><br></pre></td></tr></table></figure></p>
+<p><strong>效果如图：</strong><br><img src="https://i.imgur.com/zgX8wNE.jpg" alt="游戏开始界面"></p>
+<blockquote>
+<p><strong>PS:</strong><br>默认的字体比较小，所以我们新建了一种加大加粗的字体<br>我们没必要创建自己的App类，这里用最基本的wx.PySimpleApp就行<br>开始游戏按钮绑定了一个跳转到游戏开始界面的方法<br>设置按钮绑定了一个修改默认设置的方法，我们在这先不做处理</p>
+</blockquote>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>在构造游戏界面之前，我们先考虑游戏的一些基础数据，我们可以将一些数据设置为可配置项来控制游戏难度。<br>我们新建一个py文件命名为know_conf.py，写入两个常量和两道例题，<br>我们的题目使用一个列表的数据结构，第一个字段是问题，第二三四个字段是三个可选答案，第五个字段是正确答案<br>题库是由题目构成的一个列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 复活次数</span><br><span class="line">REVIVE = 1</span><br><span class="line"># 倒计时</span><br><span class="line">LEFT_TIME = 10</span><br><span class="line"></span><br><span class="line"># 题库</span><br><span class="line">TOPIC = [</span><br><span class="line">    [&quot;NBA历史上哪支球队获得的总冠军最多？&quot;, &quot;勇士&quot;, &quot;湖人&quot;, &quot;凯尔特人&quot;, &quot;凯尔特人&quot;],</span><br><span class="line">    [&quot;澳大利亚的首都是？&quot;, &quot;堪培拉&quot;, &quot;悉尼&quot;, &quot;墨尔本&quot;, &quot;堪培拉&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h3 id="获取一道题目"><a href="#获取一道题目" class="headerlink" title="获取一道题目"></a>获取一道题目</h3><p>每次启动游戏，我们都希望从题库随机获取一道题，之后的每一题都应该是本次游戏未回答过的，我们应该将这部分放在逻辑层处理<br>新建一个py文件命名问know_logic.py<br>构造一个题库类，写初始化方法和获取一个题目的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import know_conf</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line">class TopicSet():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.topic_set = know_conf.TOPIC</span><br><span class="line"></span><br><span class="line">    def getTopic(self):</span><br><span class="line">        i = random.randint(0, len(self.topic_set)-1)</span><br><span class="line">        topic = self.topic_set[i]</span><br><span class="line">        self.topic_set.remove(topic)</span><br><span class="line">        return topic</span><br></pre></td></tr></table></figure></p>
+<h3 id="构造游戏界面"><a href="#构造游戏界面" class="headerlink" title="构造游戏界面"></a>构造游戏界面</h3><p>在know_ui.py中import前面构建的两个py文件：know_conf.py和know_logic.py，再构造游戏界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import know_conf</span><br><span class="line">import know_logic</span><br><span class="line"></span><br><span class="line">class GameFrame(wx.Frame):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        # 初始化题号</span><br><span class="line">        self.num = 1</span><br><span class="line">        # 倒计时标志</span><br><span class="line">        self.signal = True</span><br><span class="line">        # 倒计时时间</span><br><span class="line">        self.left_time = know_conf.LEFT_TIME</span><br><span class="line">        # 题目集</span><br><span class="line">        self.topic_set = know_logic.TopicSet()</span><br><span class="line">        # 复活卡剩余次数</span><br><span class="line">        self.revive = know_conf.REVIVE</span><br><span class="line">        # 获取一个问题</span><br><span class="line">        self.topic = self.topic_set.getTopic()</span><br><span class="line">        wx.Frame.__init__(self, None, -1, &quot;Knowledge&quot;, pos=(500, 150), size=(400, 600))</span><br><span class="line">        self.answer_panel = wx.Panel(self, -1)</span><br><span class="line">        self.basic_font = wx.Font(20, wx.SWISS, wx.NORMAL, wx.BOLD, False)</span><br><span class="line">        # 题号</span><br><span class="line">        self.num_label = wx.StaticText(self.answer_panel, -1, &quot;No.&quot;+str(self.num), \</span><br><span class="line">                                       pos=(30,30), size=(70,30))</span><br><span class="line">        self.num_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.num_label.SetFont(self.basic_font)</span><br><span class="line">        # 倒计时</span><br><span class="line">        self.time_label = wx.StaticText(self.answer_panel, -1, str(self.left_time), \</span><br><span class="line">                                        pos=(200, 30), size=(20, 30))</span><br><span class="line">        self.time_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.time_label.SetFont(self.basic_font)</span><br><span class="line">        # 复活卡</span><br><span class="line">        self.revive_label = wx.StaticText(self.answer_panel, -1, str(self.revive), \</span><br><span class="line">                                          pos=(330, 30), size=(20, 30))</span><br><span class="line">        self.revive_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.revive_label.SetFont(self.basic_font)</span><br><span class="line">        # 问题</span><br><span class="line">        self.question_label = wx.StaticText(self.answer_panel, -1, self.topic[0], \</span><br><span class="line">                                            pos=(20, 100), size=(340, 60), style=wx.ST_NO_AUTORESIZE)</span><br><span class="line">        self.question_label.SetBackgroundColour(&quot;White&quot;)</span><br><span class="line">        self.question_label.SetFont(self.basic_font)</span><br><span class="line">        # 答案1</span><br><span class="line">        self.answer1_button = wx.Button(self.answer_panel, -1, self.topic[1], \</span><br><span class="line">                                        pos=(50, 200), size=(280, 60))</span><br><span class="line">        self.answer1_button.SetFont(self.basic_font)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.dealAnswer1, self.answer1_button)</span><br><span class="line">        # 答案2</span><br><span class="line">        self.answer2_button = wx.Button(self.answer_panel, -1, self.topic[2], \</span><br><span class="line">                                        pos=(50, 300), size=(280, 60))</span><br><span class="line">        self.answer2_button.SetFont(self.basic_font)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.dealAnswer2, self.answer2_button)</span><br><span class="line">        # 答案3</span><br><span class="line">        self.answer3_button = wx.Button(self.answer_panel, -1, self.topic[3], \</span><br><span class="line">                                        pos=(50, 400), size=(280, 60))</span><br><span class="line">        self.answer3_button.SetFont(self.basic_font)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.dealAnswer3, self.answer3_button)</span><br><span class="line"></span><br><span class="line">    def dealAnswer1(self, event):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def dealAnswer2(self, event):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def dealAnswer3(self, event):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></p>
+<p>现在运行程序，点击游戏开始界面的开始游戏按钮，可以跳转到游戏界面，</p>
+<blockquote>
+<p><strong>效果如图：</strong><br><img src="https://i.imgur.com/vE06Grn.jpg" alt="游戏界面"></p>
+</blockquote>
+<blockquote>
+<p><strong>PS:</strong><br>我们在第一行创建了三个静态文本框，用于显示当前题号，剩余时间，剩余复活次数<br>我们在第二行也创建了一个静态文本框，用于显示问题<br>我们创建了三个答案按钮，绑定三个处理方法，后面来详细讲怎么处理</p>
+</blockquote>
+<p><strong>下一篇，我们介绍界面加背景，怎么实现倒计时功能，以及构建游戏结束界面</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/03/接口自动化测试框架/接口自动化测试框架/" rel="next" title="接口自动化测试框架">
+                <i class="fa fa-chevron-left"></i> 接口自动化测试框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/06/用wxpython写答题小游戏/用wxpython写答题小游戏(2)/" rel="prev" title="用wxpython写答题小游戏(2)">
+                用wxpython写答题小游戏(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cy.jpg"
+                alt="cyrockss" />
+            
+              <p class="site-author-name" itemprop="name">cyrockss</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构方式"><span class="nav-number">2.</span> <span class="nav-text">架构方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Frame"><span class="nav-number">3.</span> <span class="nav-text">Frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造游戏开始界面"><span class="nav-number">4.</span> <span class="nav-text">构造游戏开始界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">5.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取一道题目"><span class="nav-number">6.</span> <span class="nav-text">获取一道题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造游戏界面"><span class="nav-number">7.</span> <span class="nav-text">构造游戏界面</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cyrockss</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
