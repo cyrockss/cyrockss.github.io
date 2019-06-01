@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T05:45:56.880Z">
+<meta property="og:updated_time" content="2019-06-01T06:31:08.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jmeter正则表达式">
 <meta name="twitter:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
@@ -381,29 +381,54 @@
 <table>
 <thead>
 <tr>
-<th>姓名</th>
-<th style="text-align:center">技能</th>
-<th style="text-align:right">排行</th>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>刘备</td>
-<td style="text-align:center">哭</td>
-<td style="text-align:right">大哥</td>
+<td style="text-align:center">( ）</td>
+<td style="text-align:center">分组</td>
 </tr>
 <tr>
-<td>关羽</td>
-<td style="text-align:center">打</td>
-<td style="text-align:right">二哥</td>
+<td style="text-align:center">[ ]</td>
+<td style="text-align:center">字符集合意味着匹配一组字符中的一个</td>
 </tr>
 <tr>
-<td>张飞</td>
-<td style="text-align:center">骂</td>
-<td style="text-align:right">三弟</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配字符串起始部分</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">匹配字符串结尾部分</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">匹配任何一个字符（\n除外）</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配0次或多次前面出现的正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">匹配1次或多次前面出现的正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">匹配0次或1次前面出现的正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center">{N}</td>
+<td style="text-align:center">匹配N次前面出现的正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center">{M,N}</td>
+<td style="text-align:center">匹配M~N次前面出现的正则表达式</td>
 </tr>
 </tbody>
 </table>
+<p><strong>特殊字符</strong><br>|   字符   |       含义       |<br>|   :–:   |      :–:       |<br>|    \d    |   匹配任何十进制数字   |<br>|    \w    |   匹配任何字母数字字符   |<br>|    \s    |   匹配任何空格字符   |<br>|    \b    |   匹配任何单词边界   |<br>|    \A    |   匹配字符串起始部分   |<br>|    \Z    |   匹配字符串结尾部分   |</p>
 
       
     </div>
