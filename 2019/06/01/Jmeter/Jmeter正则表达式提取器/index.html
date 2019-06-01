@@ -82,8 +82,8 @@
 <meta name="description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
 <meta name="keywords" content="Jmeter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jmeter正则表达式">
-<meta property="og:url" content="http://yoursite.com/2019/06/01/Jmeter/Jmeter使用正则表达式提取结果/index.html">
+<meta property="og:title" content="Jmeter正则表达式提取器">
+<meta property="og:url" content="http://yoursite.com/2019/06/01/Jmeter/Jmeter正则表达式提取器/index.html">
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
 <meta property="og:locale" content="zh-Hans">
@@ -91,9 +91,10 @@
 <meta property="og:image" content="https://i.imgur.com/rL4W4u0.jpg">
 <meta property="og:image" content="https://i.imgur.com/C9BPkyt.jpg">
 <meta property="og:image" content="https://i.imgur.com/HilSeBT.jpg">
-<meta property="og:updated_time" content="2019-06-01T08:10:03.585Z">
+<meta property="og:image" content="https://i.imgur.com/3tnSJXs.jpg">
+<meta property="og:updated_time" content="2019-06-01T08:21:00.887Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jmeter正则表达式">
+<meta name="twitter:title" content="Jmeter正则表达式提取器">
 <meta name="twitter:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
 <meta name="twitter:image" content="https://i.imgur.com/YIk7t2S.jpg">
 
@@ -125,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/01/Jmeter/Jmeter使用正则表达式提取结果/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/06/01/Jmeter/Jmeter正则表达式提取器/"/>
 
 
 
 
 
-  <title>Jmeter正则表达式 | 坏默默</title>
+  <title>Jmeter正则表达式提取器 | 坏默默</title>
   
 
 
@@ -285,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/Jmeter/Jmeter使用正则表达式提取结果/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/Jmeter/Jmeter正则表达式提取器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cyrockss">
@@ -302,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Jmeter正则表达式</h1>
+          <h1 class="post-title" itemprop="name headline">Jmeter正则表达式提取器</h1>
         
 
         <div class="post-meta">
@@ -505,6 +506,7 @@
 <h2 id="例子：使用正则表达式提取器提取token"><a href="#例子：使用正则表达式提取器提取token" class="headerlink" title="例子：使用正则表达式提取器提取token"></a>例子：使用正则表达式提取器提取token</h2><p><strong>1、http请求发送登录报文</strong><br><img src="https://i.imgur.com/C9BPkyt.jpg" alt="登录"></p>
 <p><strong>2、察看结果树中的响应数据</strong></p>
 <p><strong>3、根据响应数据构造正则表达式</strong><br>我们这需要提取token值，使用”token”:”(.*?)”来进行匹配，后面就可以使用${token}来进行引用<br><img src="https://i.imgur.com/HilSeBT.jpg" alt="提取token"></p>
+<p><strong>4、引用token</strong><br>在请求和HTTP消息头管理器中均可以使用<br><img src="https://i.imgur.com/3tnSJXs.jpg" alt="引用token"></p>
 
       
     </div>
