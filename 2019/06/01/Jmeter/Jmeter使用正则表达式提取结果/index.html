@@ -87,10 +87,15 @@
 <meta property="og:site_name" content="坏默默">
 <meta property="og:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T06:31:08.176Z">
+<meta property="og:image" content="https://i.imgur.com/YIk7t2S.jpg">
+<meta property="og:image" content="https://i.imgur.com/rL4W4u0.jpg">
+<meta property="og:image" content="https://i.imgur.com/C9BPkyt.jpg">
+<meta property="og:image" content="https://i.imgur.com/HilSeBT.jpg">
+<meta property="og:updated_time" content="2019-06-01T08:01:42.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jmeter正则表达式">
 <meta name="twitter:description" content="我们在使用Jmater进行测试的时候，常常需要把前一个请求的结果作为下个请求的参数，例如登录的token，签名认证等，本文介绍怎么在Jmeter中使用正则表达式来提取上一个的请求的结果，并使用到下一个请求中">
+<meta name="twitter:image" content="https://i.imgur.com/YIk7t2S.jpg">
 
 
 
@@ -428,7 +433,78 @@
 </tr>
 </tbody>
 </table>
-<p><strong>特殊字符</strong><br>|   字符   |       含义       |<br>|   :–:   |      :–:       |<br>|    \d    |   匹配任何十进制数字   |<br>|    \w    |   匹配任何字母数字字符   |<br>|    \s    |   匹配任何空格字符   |<br>|    \b    |   匹配任何单词边界   |<br>|    \A    |   匹配字符串起始部分   |<br>|    \Z    |   匹配字符串结尾部分   |</p>
+<p><strong>特殊字符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">匹配任何十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">匹配任何字母数字字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">匹配任何空格字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">匹配任何单词边界</td>
+</tr>
+<tr>
+<td style="text-align:center">\A</td>
+<td style="text-align:center">匹配字符串起始部分</td>
+</tr>
+<tr>
+<td style="text-align:center">\Z</td>
+<td style="text-align:center">匹配字符串结尾部分</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Jmeter中的正则表达式提取器"><a href="#Jmeter中的正则表达式提取器" class="headerlink" title="Jmeter中的正则表达式提取器"></a>Jmeter中的正则表达式提取器</h2><p><strong>1、添加正则表达式提取器</strong><br><img src="https://i.imgur.com/YIk7t2S.jpg" alt="添加正则表达式提取器"></p>
+<p><img src="https://i.imgur.com/rL4W4u0.jpg" alt="正则表达式提取器"></p>
+<p><strong>2、正则表达式提取器各参数含义</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">引用名称</td>
+<td style="text-align:center">在请求中需要引用此数据时，使用的名称</td>
+</tr>
+<tr>
+<td style="text-align:center">正则表达式</td>
+<td style="text-align:center">用于匹配，将需要的数据提取出来</td>
+</tr>
+<tr>
+<td style="text-align:center">模板</td>
+<td style="text-align:center">表示提取第几个匹配到的值：<br>$1$表示取第1个<br>$n$表示取第n个</td>
+</tr>
+<tr>
+<td style="text-align:center">匹配数字(0代表随机)</td>
+<td style="text-align:center">0代表随机取值，1代表全部取值</td>
+</tr>
+<tr>
+<td style="text-align:center">缺省值</td>
+<td style="text-align:center">如果正则表达式没有搜找到值，则使用此缺省值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PS：</strong><br>正则表达式简单的通用语法：左边界(.*?)右边界</p>
+<h2 id="例子：使用正则表达式提取器提取token"><a href="#例子：使用正则表达式提取器提取token" class="headerlink" title="例子：使用正则表达式提取器提取token"></a>例子：使用正则表达式提取器提取token</h2><p><strong>1、http请求发送登录报文</strong><br><img src="https://i.imgur.com/C9BPkyt.jpg" alt="登录"></p>
+<p><strong>2、察看结果树中的响应数据</strong></p>
+<p><strong>3、根据响应数据构造正则表达式</strong><br><img src="https://i.imgur.com/HilSeBT.jpg" alt="提取token"><br>我们这需要提取token值，使用”token”:”(.*?)”来进行匹配，后面就可以使用${token}来进行引用</p>
 
       
     </div>
@@ -603,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.</span> <span class="nav-text">正则表达式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jmeter中的正则表达式提取器"><span class="nav-number">2.</span> <span class="nav-text">Jmeter中的正则表达式提取器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子：使用正则表达式提取器提取token"><span class="nav-number">3.</span> <span class="nav-text">例子：使用正则表达式提取器提取token</span></a></li></ol></div>
             
 
           </div>
